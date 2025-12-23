@@ -1,204 +1,164 @@
-# Java Lambda Expressions – Lecture Notes
+# Java Functional Programming (Java 8)
 
-This repository contains my learning notes and practice code from the **Java Lambda Expressions** lecture, part of the *Spring & Spring Boot for Beginners* course.
+This repository contains **hands-on examples and notes** covering **Java Functional Programming concepts introduced in Java 8**, learned as part of the *Spring 7 & Spring Boot 4 for Beginners* course.
+
+The focus is on **clean code**, **reduced boilerplate**, and **modern Java practices** using lambda expressions and functional interfaces.
 
 ---
 
 ## Topics Covered
 
-### 1. Lambda Expressions (Java 8+)
+### 1. Lambda Expressions
 
-* Introduced in Java 8
-* Enable functional programming in Java
-* Represent **anonymous functions**
-* Do not belong to any class or object
-* Mainly used to implement **functional interfaces**
+* Introduction to lambda expressions
+* Syntax and structure
+* Anonymous functions
+* Parameter type inference
+* Lambda expression simplification rules
+* Replacing anonymous classes with lambdas
+* Benefits:
+
+  * Less boilerplate code
+  * Better readability
+  * Functional-style programming
 
 ---
 
 ### 2. Functional Interfaces
 
-* An interface with **exactly one abstract method**
-* Can have:
+* Definition of a functional interface
+* Rules:
 
-  * Multiple `default` methods
-  * Multiple `static` methods
-* Used as the target type for lambda expressions
+  * Exactly **one abstract method**
+  * Any number of default methods
+  * Any number of static methods
+* `@FunctionalInterface` annotation
+* Compile-time safety using annotation
+* Functional interfaces as **target types** for lambdas
 
-Example:
+---
+
+### 3. Predefined Functional Interfaces (`java.util.function`)
+
+#### Function
+
+* `Function<T, R>`
+* Takes input and returns output
+* `apply()` method
+* Use cases: transformation logic
+
+#### Consumer
+
+* `Consumer<T>`
+* Takes input, returns nothing
+* `accept()` method
+* Use cases: printing, logging, side effects
+
+#### Supplier
+
+* `Supplier<T>`
+* Takes no input, returns output
+* `get()` method
+* Use cases: object creation, lazy loading
+
+---
+
+### 4. Traditional Approach vs Lambda Expressions
+
+* Implementing functional interfaces using:
+
+  * Concrete classes (traditional way)
+  * Lambda expressions (modern way)
+* Comparison of verbosity
+* Code reduction using lambdas
+
+---
+
+### 5. Method References
+
+* Introduction to method references
+* Replacing lambda expressions that only call methods
+* `::` (double colon) operator
+* Improved readability and maintainability
+
+---
+
+### 6. Types of Method References
+
+#### a. Method Reference to a Static Method
 
 ```java
-@FunctionalInterface
-interface Shape {
-    void draw();
-}
+Math::sqrt
+ClassName::staticMethod
+```
+
+#### b. Method Reference to an Instance Method of a Particular Object
+
+```java
+objectReference::instanceMethod
+```
+
+#### c. Method Reference to an Instance Method of an Arbitrary Object
+
+```java
+String::toLowerCase
+String::compareToIgnoreCase
+```
+
+#### d. Method Reference to a Constructor
+
+```java
+HashSet::new
+ClassName::new
 ```
 
 ---
 
-### 3. Lambda Expression Syntax
+### 7. Lambda to Method Reference Conversion
 
-General form:
+* When conversion is possible
+* IntelliJ IDEA shortcut:
 
-```java
-(parameters) -> expression
-```
-
-or
-
-```java
-(parameters) -> {
-    statements;
-}
-```
-
-Parts:
-
-1. Parameter list
-2. Arrow operator `->`
-3. Lambda body
+  * `Alt + Enter → Replace lambda with method reference`
+* Rules for safe replacement
 
 ---
 
-### 4. Traditional Approach vs Lambda
+## Tools & Technologies
 
-**Traditional Implementation**
-
-```java
-class Rectangle implements Shape {
-    @Override
-    public void draw() {
-        System.out.println("Rectangle");
-    }
-}
-```
-
-**Using Lambda Expression**
-
-```java
-Shape rectangle = () -> System.out.println("Rectangle");
-```
-
-Benefits:
-
-* Less boilerplate code
-* Cleaner and more readable
-* Functional style programming
+* Java 8+ (tested up to Java 21+)
+* IntelliJ IDEA
+* Java Standard Library (`java.util.function`)
 
 ---
 
-### 5. Lambda with Parameters
+## Learning Outcome
 
-Functional Interface:
-
-```java
-interface Addition {
-    int add(int a, int b);
-}
-```
-
-Lambda Implementation:
-
-```java
-Addition addition = (a, b) -> a + b;
-System.out.println(addition.add(10, 20));
-```
-
-Notes:
-
-* Parameter types can be omitted
-* Return type is inferred by the compiler
+* Write clean, concise Java code
+* Understand functional programming concepts
+* Reduce boilerplate code
+* Use modern Java features effectively
+* Prepare for Spring Boot & Streams API
 
 ---
 
-### 6. Lambda with Multiple Statements
+## Next Topics (Upcoming)
 
-```java
-Addition addition = (a, b) -> {
-    int sum = a + b;
-    return sum;
-};
-```
-
----
-
-### 7. Passing Lambda as Method Parameter
-
-```java
-static void printShape(Shape shape) {
-    shape.draw();
-}
-```
-
-Usage:
-
-```java
-printShape(() -> System.out.println("Circle"));
-```
-
-This demonstrates **passing behavior as a parameter**.
-
----
-
-### 8. Lambda with Runnable Interface
-
-**Traditional Way**
-
-```java
-class ThreadDemo implements Runnable {
-    @Override
-    public void run() {
-        System.out.println("Thread running");
-    }
-}
-```
-
-**Using Lambda**
-
-```java
-Thread t = new Thread(() -> System.out.println("Thread running"));
-t.start();
-```
-
-Runnable is a functional interface, so it works with lambdas.
-
----
-
-### 9. Key Differences: Method vs Lambda
-
-| Feature          | Method   | Lambda       |
-| ---------------- | -------- | ------------ |
-| Name             | Required | Not required |
-| Belongs to class | Yes      | No           |
-| Return type      | Explicit | Inferred     |
-| Boilerplate      | More     | Less         |
-
----
-
-## Key Takeaways
-
-* Lambda expressions work only with functional interfaces
-* They reduce boilerplate code
-* Used heavily with:
-
-  * Threads
-  * Collections
-  * Streams
-  * Callbacks
-* Java compiler infers parameter and return types
-
----
-
-## Next Topics
-
-* Method References
 * Optional Class
-* Default and Static Methods in Interfaces
+* Default & Static Methods in Interfaces
 * Streams API
+* Collections vs Streams
+* Functional Programming in Spring Boot
 
 ---
 
 ## Author
 
-Prabhat Kapkoti
+**Prabhat Kapkoti**
+MCA | Java & Spring Boot Learner
 
+---
+
+## License
+
+This project is for **learning and educational purposes**.
