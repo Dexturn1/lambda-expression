@@ -21,6 +21,5 @@ public class RunnableLambdaExample {
 
         Thread threadLambda = new Thread(()-> System.out.println("running method lambda without storing it in the variable"));
         threadLambda.start();
-
     }
 }
